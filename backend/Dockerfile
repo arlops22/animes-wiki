@@ -1,10 +1,8 @@
-FROM node
+FROM node:26-alpine
 
-RUN mkdir api
+WORKDIR /app/backend
 
-WORKDIR /api
-
-COPY package.json .
+COPY package*.json ./
 
 RUN npm install
 
@@ -16,4 +14,4 @@ COPY docker-entrypoint.sh .
 
 RUN chmod +x docker-entrypoint.sh
 
-CMD ["sh", "docker-entrypoint.sh"]
+ENTRYPOINT ["/bin/sh", "./docker-entrypoint.sh"]
