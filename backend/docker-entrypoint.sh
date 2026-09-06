@@ -1,4 +1,6 @@
 #!/bin/sh
+set -e
+
 npm run prisma:generate
 npm run migrate:dev
-npm run dev
+exec npm run dev

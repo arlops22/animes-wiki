@@ -1,17 +1,35 @@
 services:
-    app:
+    web:
+        container_name: anime_wiki_web
+        build:
+            context: ./frontend
+            dockerfile: Dockerfile
+        ports:
+            - 3000:3000
+        depends_on:
+            postgresql:
+                condition: service_healthy
+            api:
+                condition: service_started
+        volumes:
+            - ./frontend:/app/frontend
+            - /app/frontend/node_modules
+        networks:
+            - next-node
+
+    api:
         container_name: anime_wiki_api
         build:
-            context: ./
-            dockerfile: ./Dockerfile
+            context: ./backend
+            dockerfile: Dockerfile
         ports:
-            - ${PORT}:8000
+            - 8000:8000
         depends_on:
             postgresql:
                 condition: service_healthy
         volumes:
-            - .:/api
-            - /api/node_modules
+            - ./backend:/app/backend
+            - /app/backend/node_modules
         env_file:
             - .env
 
@@ -31,6 +49,10 @@ services:
             interval: 5s
             timeout: 5s
             retries: 5
+
+networks:
+    next-node:
+    node-postgres:
 
 volumes:
     postgres_data:
