@@ -17,15 +17,18 @@ This is a monorepo containing both the **backend** (API) and the **frontend** (w
 ## 🛠️ Tech stack
 
 **Backend**
+
 - **[Node.js](https://nodejs.org/)** — runtime environment
 - **[Express](https://expressjs.com/)** — web/HTTP framework
 - **[PostgreSQL](https://www.postgresql.org/)** — relational database
 - **[Prisma](https://www.prisma.io/)** — ORM and migration manager
 
 **Frontend**
+
 - **[Next.js](https://nextjs.org/)** — React framework
 
 **Infrastructure**
+
 - **[Docker](https://www.docker.com/)** / **[Docker Compose](https://docs.docker.com/compose/)** — containerized environment for running the whole stack
 
 ## 🗂️ Entity-Relationship Diagram
@@ -85,7 +88,6 @@ The project runs entirely through Docker — no need to install Node.js, Postgre
     This spins up the backend, frontend, and PostgreSQL database.
 
 4. **Access the app**
-
     - Frontend: `http://localhost:3000`
     - Backend API: `http://localhost:8000`
 
@@ -98,5 +100,6 @@ The project runs entirely through Docker — no need to install Node.js, Postgre
 ## 🧪 Tests
 
 ```bash
-docker compose exec backend npm test
+docker exec -it anime_wiki_api npm run test:unit
+docker exec -it anime_wiki_api npm run test:integration
 ```
