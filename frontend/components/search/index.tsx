@@ -5,13 +5,13 @@ import { Search as SearchIcon } from 'lucide-react';
 import { InputGroup, InputGroupAddon, InputGroupInput } from '@/components/ui/input-group';
 import { ChangeEvent, useState } from 'react';
 
-interface SearchFieldProps {
+interface IProps {
     onSearch: (value: string) => void;
     placeholder: string;
     setIsLoading: Function;
 }
 
-export function SearchField(props: SearchFieldProps) {
+export function SearchField(props: IProps) {
     const { onSearch, setIsLoading, placeholder } = props;
 
     const [debounce_timeout, setDebounceTimeout] = useState<NodeJS.Timeout | undefined>(undefined);
