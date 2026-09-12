@@ -1,15 +1,16 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import Image from 'next/image';
-import { DM_Sans, Inter } from 'next/font/google';
+import { DM_Sans } from 'next/font/google';
+import { ThemeProvider } from 'next-themes';
 
 import logoImg from '../public/images/logo.png';
+import { cn } from '@/lib/utils';
 import './globals.css';
-import { cn } from "@/lib/utils";
 
-const inter = Inter({subsets:['latin'],variable:'--font-sans'});
+const dmSans = DM_Sans({ subsets: ['latin'], variable: '--font-sans' });
 
-const dmSans = DM_Sans();
+import ThemeToggle from '@/components/theme-toggle';
 
 export const metadata: Metadata = {
     title: 'Anime Wiki',
@@ -18,16 +19,23 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: LayoutProps<'/'>) {
     return (
-        <html lang="en" className={cn("h-full", "antialiased", "bg-dark-gray-700", "text-dark-gray-100", dmSans.className, "font-sans", inter.variable)}>
+        <html suppressHydrationWarning lang="en" className={cn('h-full', 'antialiased', 'font-sans', dmSans.variable)}>
             <body suppressHydrationWarning className="min-h-full flex flex-col">
-                <header>
-                    <div className="container py-10 mx-auto">
-                        <Link href={'/'}>
-                            <Image alt="Logo" src={logoImg} />
-                        </Link>
+                <ThemeProvider attribute="class">
+                    <div>
+                        <header>
+                            <div className="container py-10 mx-auto">
+                                <div className="flex flex-row justify-between">
+                                    <Link href={'/'}>
+                                        <Image alt="Logo" src={logoImg} />
+                                    </Link>
+                                    <ThemeToggle />
+                                </div>
+                            </div>
+                        </header>
+                        {children}
                     </div>
-                </header>
-                {children}
+                </ThemeProvider>
             </body>
         </html>
     );

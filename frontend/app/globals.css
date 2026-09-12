@@ -6,9 +6,9 @@
 
 @theme inline {
     --color-primary: #ffd400;
-    --color-light-gray-700: #b1b1a4;
+    --color-light-gray-700: #6c6c58;
     --color-light-gray-500: #b1b1a4;
-    --color-light-gray-300: #ebebe2;
+    --color-light-gray-300: #dcdccf;
     --color-light-gray-100: #f3f3ed;
     --color-dark-gray-700: #272725;
     --color-dark-gray-500: #3a3a38;
@@ -97,7 +97,7 @@
     --sidebar-ring: oklch(0.708 0 0);
 }
 
-.dark {
+[data-theme='dark'] {
     --background: oklch(0.145 0 0);
     --foreground: oklch(0.985 0 0);
     --card: oklch(0.205 0 0);
@@ -136,7 +136,7 @@
         @apply border-border outline-ring/50;
     }
     body {
-        @apply text-dark-gray-100;
+        @apply dark:bg-dark-gray-700 bg-light-gray-100 dark:text-dark-gray-100 text-light-gray-700;
     }
     html {
         @apply font-sans;
